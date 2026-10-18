@@ -321,3 +321,36 @@ def test_readme_never_tells_people_to_run_a_package_that_does_not_exist() -> Non
                     f"{doc.name}:{n} runs a console script without --from, which "
                     f"cannot resolve: {stripped!r}"
                 )
+
+
+def test_readme_has_no_relative_links_for_pypi() -> None:
+    """PyPI renders the README with no repository to resolve paths against.
+
+    A relative target that works on GitHub resolves to nothing on the project
+    page, so the logo shows as alt text and document links 404. An earlier pass
+    absolutised Markdown `[text](target)` links but not `href=`/`src=` inside
+    raw HTML, and `<a href="LICENSE">` reached a published release that way.
+    Both forms are checked here because both end up in the same description.
+    """
+    import pathlib
+    import re
+
+    readme = (pathlib.Path(__file__).resolve().parents[2] / "README.md").read_text()
+    offenders: list[str] = []
+
+    # Markdown: [text](target)
+    offenders += [
+        t
+        for t in re.findall(r"\[[^\]]*\]\(([^)]+)\)", readme)
+        if not t.startswith(("http://", "https://", "#"))
+    ]
+    # Raw HTML attributes the Markdown pass does not see.
+    offenders += [
+        t
+        for t in re.findall(r'(?:href|src|srcset)="([^"]+)"', readme)
+        if not t.startswith(("http://", "https://", "#"))
+    ]
+
+    assert not offenders, (
+        f"relative targets resolve to nothing on PyPI: {sorted(set(offenders))}"
+    )

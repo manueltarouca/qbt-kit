@@ -1,9 +1,9 @@
 # qbt-kit
 
-<a href="https://github.com/manueltarouca/qbt-kit/actions/workflows/ci.yaml"><img src="https://github.com/manueltarouca/qbt-kit/actions/workflows/ci.yaml/badge.svg" alt="CI status" /></a>
-<a href="https://pypi.org/project/qbt-kit/"><img src="https://img.shields.io/pypi/v/qbt-kit.svg" alt="Latest PyPI version" /></a>
-<a href="https://pypi.org/project/qbt-kit/"><img src="https://img.shields.io/pypi/pyversions/qbt-kit.svg" alt="Supported Python versions" /></a>
-<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-blue.svg" alt="MIT licence" /></a>
+[![CI status](https://github.com/manueltarouca/qbt-kit/actions/workflows/ci.yaml/badge.svg)](https://github.com/manueltarouca/qbt-kit/actions/workflows/ci.yaml)
+[![Latest PyPI version](https://img.shields.io/pypi/v/qbt-kit.svg)](https://pypi.org/project/qbt-kit/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/qbt-kit.svg)](https://pypi.org/project/qbt-kit/)
+[![MIT licence](https://img.shields.io/badge/licence-MIT-blue.svg)](https://github.com/manueltarouca/qbt-kit/blob/main/LICENSE)
 
 <p align="center">
   <picture>
