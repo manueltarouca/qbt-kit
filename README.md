@@ -67,8 +67,12 @@ PyPI's `qbt` name belongs to an unrelated package, so the CLI is run via
 
 ```sh
 uvx --from qbt-kit qbt doctor
-uvx qbt-mcp --help          # the MCP server ships under its own name
+uvx --from "qbt-kit[mcp]" qbt-mcp --help   # the server lives in the `mcp` extra
 ```
+
+Both run via `--from` because the `qbt` name on PyPI belongs to an unrelated
+package, and `qbt-mcp` is a script inside this one rather than a package of its
+own — `uvx qbt-mcp` resolves to nothing.
 
 Or add it to a project:
 
@@ -117,7 +121,7 @@ runs on the same machine as qBittorrent.
   "mcpServers": {
     "qbittorrent": {
       "command": "uvx",
-      "args": ["qbt-mcp", "--url", "http://127.0.0.1:8080"]
+      "args": ["--from", "qbt-kit[mcp]", "qbt-mcp", "--url", "http://127.0.0.1:8080"]
     }
   }
 }

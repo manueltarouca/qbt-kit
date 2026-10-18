@@ -294,3 +294,30 @@ def test_filter_values_are_translated_like_names(
 
     version = (2, 8, 0) if old_server else (2, 11, 0)
     assert wire_filter_value(value, version) == expected
+
+
+def test_readme_never_tells_people_to_run_a_package_that_does_not_exist() -> None:
+    """`uvx qbt-mcp` resolves to nothing and must not appear as an instruction.
+
+    `qbt-mcp` is a console script inside `qbt-kit`, not a package, so a bare
+    `uvx qbt-mcp` fails with "not found in the package registry". That wrong
+    command sat in the README through a release and reached the PyPI page,
+    where it is the first thing a new user copies. The rule is mechanical, so
+    a test can hold it: any `uvx` line naming qbt-mcp has to go through
+    `--from`.
+    """
+    import pathlib
+
+    root = pathlib.Path(__file__).resolve().parents[2]
+    for doc in (root / "README.md", root / "skills" / "qbt-kit" / "SKILL.md"):
+        if not doc.exists():
+            continue
+        for n, line in enumerate(doc.read_text().splitlines(), 1):
+            stripped = line.strip().lstrip("$ ")
+            if not stripped.startswith("uvx "):
+                continue
+            if "qbt-mcp" in stripped or "qbt " in stripped:
+                assert "--from" in stripped, (
+                    f"{doc.name}:{n} runs a console script without --from, which "
+                    f"cannot resolve: {stripped!r}"
+                )
