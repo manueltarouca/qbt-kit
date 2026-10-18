@@ -48,11 +48,22 @@ M6 ─ MCP server                            ███████████�
      ├─ env-var config                     ✔  QBT_URL/API_KEY/READ_ONLY, no OAuth
      └─ dogfooded via .mcp.json           ✔  drove a real 15-file import
         │
-M7 ─ release + dogfood                     ████████████░░░░░░░░  awaiting approval
+M7 ─ release                               ████████████████████  done
      ├─ LICENSE + PEP 639 metadata         ✔  MIT, carried in the wheel
-     ├─ skill in the repo                  ✔  CLI usage + swarm-health rule
-     ├─ PyPI via trusted publishing        ·  pending trusted-publisher setup
-     └─ retire the ad-hoc scripts          ·  dl-ready.py, search.py's qbt half
+     ├─ PyPI via trusted publishing        ✔  0.1.0, no long-lived token
+     ├─ public repo + green CI             ✔  4 qBittorrent versions on Linux
+     └─ installable as a Claude plugin     ✔  repo doubles as its marketplace
+        │
+M8 ─ dogfood before going wider            ████░░░░░░░░░░░░░░░░  in progress
+     ├─ use it for the real import loop    ·  the queue work it was built for
+     ├─ retire the ad-hoc scripts          ·  dl-ready.py, search.py's qbt half
+     ├─ Anthropic directory submission     ·  deliberately held, see below
+     └─ 0.1.1 with the README link fix     ·  PyPI descriptions are immutable
+
+The directory submission is held on purpose. One blocking finding was fixed
+(an unpinned `uv run`), and the rest of the checklist passes, but a listing
+commits us to review on every version and the plugin is days old with no users.
+Exercise it first; submit something that has been used.
 ```
 
 ## Coverage, by scope
