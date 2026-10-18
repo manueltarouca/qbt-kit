@@ -1,0 +1,126 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to PyPI (requires explicit opt-in)"
+        type: boolean
+        default: false
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { enable-cache: true }
+      - run: uv sync --all-extras
+      - run: uv run ruff check src tools tests
+      - run: uv run ruff format --check src tools tests
+      # ty is pre-1.0 and still moving, so it reports without gating the build.
+      - run: uv run ty check src tools tests
+        continue-on-error: true
+
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { enable-cache: true }
+      - run: uv sync --all-extras --python ${{ matrix.python }}
+      - run: uv run pytest -q tests/unit
+
+  coverage:
+    # The claim "every endpoint this server version exposes is specced" is only
+    # true if something checks it. This is that something.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run python tools/build_coverage.py --target release-5.2.3 --strict
+
+  contract:
+    # Real qBittorrent containers, one job per version, so the compatibility
+    # claims are tested rather than asserted.
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tag: ["4.6.7-1", "5.0.2-1", "5.1.2-1", "5.2.3-1"]
+    env:
+      QBT_TEST_TAG: ${{ matrix.tag }}
+      # Runners carry both podman and docker; pin to docker so CI exercises the
+      # same path the project is actually developed and verified against.
+      QBT_CONTAINER_RUNTIME: docker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { enable-cache: true }
+      - run: uv sync --all-extras
+      - run: uv run pytest -q -m contract tests/contract
+
+  drift:
+    # Upstream adds endpoints without telling us. This warns rather than fails,
+    # because a new endpoint upstream is news, not a broken build.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - name: re-extract master and diff
+        # GITHUB_TOKEN because the extractor reads the GitHub API, and an
+        # unauthenticated shared-IP runner gets rate-limited into a 403.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          uv run python tools/extract_inventory.py --ref master -o /tmp/master.json || {
+            echo "::warning::could not re-extract upstream inventory"
+            exit 0
+          }
+          # Compare the endpoints only. The documents also carry `fetched_at`,
+          # so diffing whole files reported drift on every single push.
+          if ! uv run python - <<'PY'
+          import json, sys
+          a = json.load(open("src/qbtkit/inventory/master.json"))["endpoints"]
+          b = json.load(open("/tmp/master.json"))["endpoints"]
+          key = lambda e: (e["scope"], e["name"])
+          sa, sb = {key(e) for e in a}, {key(e) for e in b}
+          if sa == sb:
+              sys.exit(0)
+          for s, n in sorted(sb - sa):
+              print(f"::warning::new upstream endpoint {s}/{n}")
+          for s, n in sorted(sa - sb):
+              print(f"::warning::endpoint gone upstream {s}/{n}")
+          sys.exit(1)
+          PY
+          then
+            echo "::warning::upstream endpoint inventory has changed"
+          fi
+
+  publish:
+    # Deliberately NOT triggered by pushing a tag. Publishing is irreversible —
+    # a version number on PyPI can never be reused — so it requires a manual
+    # run with the `publish` input ticked, and the `pypi` environment should
+    # also carry required reviewers.
+    needs: [lint, unit, coverage, contract]
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read         # actions/checkout
+      id-token: write        # trusted publishing; no long-lived token
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv build
+      - run: uv publish --trusted-publishing always

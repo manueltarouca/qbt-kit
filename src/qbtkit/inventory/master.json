@@ -1,0 +1,667 @@
+{
+  "ref": "master",
+  "fetched_at": "2026-10-17T23:10:15Z",
+  "endpoint_count": 132,
+  "endpoints": [
+    {
+      "scope": "app",
+      "name": "buildInfo",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "cookies",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "defaultSavePath",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "deleteAPIKey",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "getDirectoryContent",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "getFreeSpaceAtPath",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "networkInterfaceAddressList",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "networkInterfaceList",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "preferences",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "processInfo",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "rotateAPIKey",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "sendTestEmail",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "setCookies",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "setPreferences",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "shutdown",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "version",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "app",
+      "name": "webapiVersion",
+      "source": "appcontroller.cpp"
+    },
+    {
+      "scope": "auth",
+      "name": "login",
+      "source": "authcontroller.cpp"
+    },
+    {
+      "scope": "auth",
+      "name": "logout",
+      "source": "authcontroller.cpp"
+    },
+    {
+      "scope": "clientdata",
+      "name": "load",
+      "source": "clientdatacontroller.cpp"
+    },
+    {
+      "scope": "clientdata",
+      "name": "store",
+      "source": "clientdatacontroller.cpp"
+    },
+    {
+      "scope": "log",
+      "name": "main",
+      "source": "logcontroller.cpp"
+    },
+    {
+      "scope": "log",
+      "name": "peers",
+      "source": "logcontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "addFeed",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "addFolder",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "cloneRule",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "exportRules",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "importRules",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "items",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "markAsRead",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "matchingArticles",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "moveItem",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "refreshItem",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "removeItem",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "removeRule",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "renameRule",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "rules",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "setFeedRefreshInterval",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "setFeedURL",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "rss",
+      "name": "setRule",
+      "source": "rsscontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "delete",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "downloadTorrent",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "enablePlugin",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "installPlugin",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "plugins",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "results",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "start",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "status",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "stop",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "uninstallPlugin",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "search",
+      "name": "updatePlugins",
+      "source": "searchcontroller.cpp"
+    },
+    {
+      "scope": "sync",
+      "name": "maindata",
+      "source": "synccontroller.cpp"
+    },
+    {
+      "scope": "sync",
+      "name": "torrentPeers",
+      "source": "synccontroller.cpp"
+    },
+    {
+      "scope": "torrentcreator",
+      "name": "addTask",
+      "source": "torrentcreatorcontroller.cpp"
+    },
+    {
+      "scope": "torrentcreator",
+      "name": "deleteTask",
+      "source": "torrentcreatorcontroller.cpp"
+    },
+    {
+      "scope": "torrentcreator",
+      "name": "status",
+      "source": "torrentcreatorcontroller.cpp"
+    },
+    {
+      "scope": "torrentcreator",
+      "name": "torrentFile",
+      "source": "torrentcreatorcontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "SSLParameters",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "add",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "addPeers",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "addTags",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "addTrackers",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "addWebSeeds",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "bottomPrio",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "categories",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "count",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "createCategory",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "createTags",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "decreasePrio",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "delete",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "deleteTags",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "downloadFile",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "downloadLimit",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "editCategory",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "editTracker",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "editWebSeed",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "export",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "fetchMetadata",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "filePrio",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "files",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "increasePrio",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "info",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "parseMetadata",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "pieceAvailability",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "pieceHashes",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "pieceStates",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "properties",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "reannounce",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "recheck",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "removeCategories",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "removeTags",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "removeTrackers",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "removeWebSeeds",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "rename",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "renameFile",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "renameFolder",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "saveMetadata",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setAutoManagement",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setCategory",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setComment",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setDownloadLimit",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setDownloadPath",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setForceStart",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setLocation",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setSSLParameters",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setSavePath",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setShareLimits",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setSuperSeeding",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setTags",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "setUploadLimit",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "start",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "stop",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "tags",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "toggleFirstLastPiecePrio",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "toggleSequentialDownload",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "topPrio",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "trackers",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "uploadLimit",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "torrents",
+      "name": "webseeds",
+      "source": "torrentscontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "banPeers",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "downloadLimit",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "getSpeedLimits",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "info",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "pauseSession",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "resumeSession",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "setDownloadLimit",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "setSpeedLimits",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "setSpeedLimitsMode",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "setUploadLimit",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "speedLimitsMode",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "toggleSpeedLimitsMode",
+      "source": "transfercontroller.cpp"
+    },
+    {
+      "scope": "transfer",
+      "name": "uploadLimit",
+      "source": "transfercontroller.cpp"
+    }
+  ]
+}

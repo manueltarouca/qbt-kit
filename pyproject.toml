@@ -1,0 +1,116 @@
+[project]
+name = "qbt-kit"
+version = "0.1.0"
+description = "Spec-driven client, 1:1 CLI and MCP server for the qBittorrent WebUI API"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "mt", email = "manuel+git@matm.xyz" }]
+keywords = ["qbittorrent", "torrent", "cli", "mcp", "webui-api"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: System Administrators",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Communications :: File Sharing",
+]
+
+# Deliberately small. Each addition is justified in docs/dependencies.md and
+# vetted before it lands, because this package will run with credentials and
+# can delete a user's data.
+dependencies = [
+  "httpx>=0.28",   # pooling, timeouts, cookie jar; stdlib urllib lacks all three
+  "typer>=0.27",   # generated CLI; 123 subcommands need a real framework
+]
+
+[project.optional-dependencies]
+# The MCP server is an extra so the CLI stays small. Both are needed by
+# qbtkit.mcp only; pydantic arrives with mcp anyway but is imported directly,
+# and an undeclared import is a break waiting for mcp to drop it.
+mcp = [
+  "mcp>=2.3",        # current major is 2.x; a 1.x floor resolves a dead API
+  "pydantic>=2.0",   # Field(), for the tool argument schemas
+]
+
+[project.urls]
+Homepage = "https://github.com/manueltarouca/qbt-kit"
+Issues = "https://github.com/manueltarouca/qbt-kit/issues"
+Changelog = "https://github.com/manueltarouca/qbt-kit/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/manueltarouca/qbt-kit#readme"
+
+[project.scripts]
+# PyPI `qbt` is taken by an unrelated package, so `uvx qbt` will NOT run this;
+# use `uvx --from qbt-kit qbt`. `qbt-mcp` needs the optional `mcp` extra, so it
+# is `uvx --from "qbt-kit[mcp]" qbt-mcp` — running it without the extra exits
+# with that instruction rather than a ModuleNotFoundError.
+qbt = "qbtkit.cli:app"
+qbt-mcp = "qbtkit.mcp:main"
+
+[build-system]
+requires = ["uv_build>=0.8,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv]
+required-version = ">=0.12"
+
+[tool.uv.build-backend]
+# project name is qbt-kit, but the import name is qbtkit
+module-name = "qbtkit"
+
+[dependency-groups]
+dev = [
+  "ruff>=0.17",
+  "ty>=0.0.89",      # pinned low: pre-1.0, so advisory in CI rather than a gate
+  "pytest>=8.3",
+  "pytest-asyncio>=0.25",
+]
+
+[tool.ruff]
+line-length = 96
+target-version = "py311"
+
+[tool.ruff.format]
+# ruff 0.17 formats Python inside Markdown fences. The snippets in docs/PLAN.md and
+# the docs are laid out by hand to read as illustrations, not as source, and
+# expanding them one argument per line makes the point harder to see.
+exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "W",     # pycodestyle, pyflakes
+  "I",               # import sorting
+  "UP",              # pyupgrade
+  "B",               # bugbear
+  "SIM",             # simplify
+  "RUF",
+  "S",               # bandit — this package handles credentials
+  "ANN",             # annotations, since the spec is type-driven
+]
+ignore = [
+  "ANN401",          # Any is legitimate for passthrough preference values
+  "S105", "S106",    # literal "password" strings in spec param names
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "ANN"]          # asserts are the point in tests
+"tools/**" = ["S310"]                 # urllib on pinned github URLs, by design
+# The harness shells out to podman and rm with fixed argv built from
+# package-controlled values; nothing here is user input.
+"tests/contract/harness.py" = ["S310", "S603", "S607"]
+"tests/contract/**" = ["S310"]
+
+[tool.ty.rules]
+# ty is pre-1.0; keep it informative while the spec primitives are in flux.
+possibly-unresolved-reference = "warn"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "contract: needs a qBittorrent container",
+  "realworld: needs outbound internet; opt-in only",
+]
+addopts = "-m 'not contract and not realworld'"
