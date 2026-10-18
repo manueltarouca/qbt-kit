@@ -7,9 +7,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/logo.png">
-    <img alt="qbt-kit" src="assets/logo.png" width="180">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/manueltarouca/qbt-kit/main/assets/logo-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/manueltarouca/qbt-kit/main/assets/logo.png">
+    <img alt="qbt-kit" src="https://raw.githubusercontent.com/manueltarouca/qbt-kit/main/assets/logo.png" width="180">
   </picture>
 </p>
 
@@ -175,21 +175,21 @@ so the gates are code rather than guidance:
 `qbt-mcp` speaks stdio by default, which keeps it a child process with nothing
 listening. The `sse` and `streamable-http` transports expose an
 *unauthenticated* control surface holding your qBittorrent credentials — bound
-to loopback, but do not forward those ports. See [SECURITY.md](SECURITY.md).
+to loopback, but do not forward those ports. See [SECURITY.md](https://github.com/manueltarouca/qbt-kit/blob/main/SECURITY.md).
 
 ## Documentation
 
 | | |
 |---|---|
-| [`docs/TRACEABILITY.md`](docs/TRACEABILITY.md) | how the coverage claim is built and gated |
-| [`docs/TESTING.md`](docs/TESTING.md) | the container harness, and behaviours that cost real time to learn |
-| [`docs/PLAN.md`](docs/PLAN.md) | the design and the reasoning behind it |
-| [`docs/ROADMAP.md`](docs/ROADMAP.md) | what is done and what is not |
-| [`docs/REVIEW-1.md`](docs/REVIEW-1.md) | an independent review of the plan, with every finding dispositioned |
-| [`docs/dependencies.md`](docs/dependencies.md) | every dependency, and why it is justified |
-| [`SECURITY.md`](SECURITY.md) | threat model, credential handling, how to report a vulnerability |
+| [`docs/TRACEABILITY.md`](https://github.com/manueltarouca/qbt-kit/blob/main/docs/TRACEABILITY.md) | how the coverage claim is built and gated |
+| [`docs/TESTING.md`](https://github.com/manueltarouca/qbt-kit/blob/main/docs/TESTING.md) | the container harness, and behaviours that cost real time to learn |
+| [`docs/PLAN.md`](https://github.com/manueltarouca/qbt-kit/blob/main/docs/PLAN.md) | the design and the reasoning behind it |
+| [`docs/ROADMAP.md`](https://github.com/manueltarouca/qbt-kit/blob/main/docs/ROADMAP.md) | what is done and what is not |
+| [`docs/REVIEW-1.md`](https://github.com/manueltarouca/qbt-kit/blob/main/docs/REVIEW-1.md) | an independent review of the plan, with every finding dispositioned |
+| [`docs/dependencies.md`](https://github.com/manueltarouca/qbt-kit/blob/main/docs/dependencies.md) | every dependency, and why it is justified |
+| [`SECURITY.md`](https://github.com/manueltarouca/qbt-kit/blob/main/SECURITY.md) | threat model, credential handling, how to report a vulnerability |
 
-A Claude skill ships in [`skills/qbt-kit/`](skills/qbt-kit/) covering CLI usage
+A Claude skill ships in [`skills/qbt-kit/`](https://github.com/manueltarouca/qbt-kit/tree/main/skills/qbt-kit/) covering CLI usage
 and the swarm-health rule.
 
 ## Field notes
@@ -226,7 +226,7 @@ Things that cost us time, documented so they cost you none.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). The short version: endpoints are added
+See [CONTRIBUTING.md](https://github.com/manueltarouca/qbt-kit/blob/main/CONTRIBUTING.md). The short version: endpoints are added
 to the spec under `src/qbtkit/spec/`, never by hand to the CLI or MCP, and
 `tools/build_coverage.py --strict` has to stay green.
 
@@ -242,4 +242,4 @@ to the spec under `src/qbtkit/spec/`, never by hand to the CLI or MCP, and
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](https://github.com/manueltarouca/qbt-kit/blob/main/LICENSE).
