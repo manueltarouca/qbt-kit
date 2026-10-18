@@ -173,6 +173,19 @@ class Node:
             timeout=10,
         )
 
+    def open_downloads(self) -> None:
+        """Let the host write into the bind-mounted downloads directory.
+
+        The container runs qBittorrent as root (PUID=0), which is fine under
+        rootless podman because container-root maps back to the invoking user.
+        Under rootful docker — every Linux CI runner — container-root is real
+        root, so the directory qBittorrent takes ownership of cannot be written
+        by the test process, and every test that seeds content dies with
+        EACCES. Opening the permissions from inside the container is the one
+        fix that works the same under both.
+        """
+        container("exec", self.name, "chmod", "-R", "0777", "/downloads", check=False)
+
     def wait_ready(self, timeout: int = 90) -> None:
         deadline = time.time() + timeout
         while time.time() < deadline:
@@ -230,6 +243,7 @@ class Swarm:
         for node in (self.seeder, self.leecher):
             node.wait_ready()
             node.isolate()
+            node.open_downloads()
         return self
 
     def down(self) -> None:
