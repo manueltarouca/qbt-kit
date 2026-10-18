@@ -1,0 +1,16 @@
+{
+  "name": "qbt-kit",
+  "description": "qbt-kit — a complete, safety-gated interface to the qBittorrent WebUI API",
+  "owner": {
+    "name": "mt",
+    "url": "https://github.com/manueltarouca"
+  },
+  "plugins": [
+    {
+      "name": "qbt-kit",
+      "source": "./",
+      "description": "Drive qBittorrent from Claude Code: 15 task-shaped MCP tools over all 123 WebUI API endpoints, plus a skill covering swarm health and the traps in judging whether a download has finished.",
+      "category": "productivity"
+    }
+  ]
+}

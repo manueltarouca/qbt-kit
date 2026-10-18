@@ -77,6 +77,20 @@ uv add qbt-kit              # library and CLI
 uv add "qbt-kit[mcp]"       # with the MCP server
 ```
 
+### As a Claude Code plugin
+
+This repository is also a plugin marketplace, so one line installs the MCP
+server and the skill together:
+
+```
+/plugin install qbt-kit --marketplace manueltarouca/qbt-kit
+```
+
+The bundled MCP server runs from the plugin's own checkout, so it needs `uv`
+but not a published package, and it always matches the version you installed.
+Point it at your server with `QBT_URL`, and see [Configuration](#configuration)
+for credentials.
+
 ## Quickstart
 
 ```sh

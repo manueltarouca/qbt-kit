@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "qbittorrent": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${CLAUDE_PLUGIN_ROOT}",
+        "--extra",
+        "mcp",
+        "qbt-mcp"
+      ],
+      "env": {
+        "QBT_URL": "${QBT_URL:-http://127.0.0.1:8080}",
+        "QBT_API_KEY": "${QBT_API_KEY:-}",
+        "QBT_READ_ONLY": "${QBT_READ_ONLY:-0}"
+      }
+    }
+  }
+}

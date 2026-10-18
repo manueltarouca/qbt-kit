@@ -1,0 +1,12 @@
+{
+  "name": "qbt-kit",
+  "version": "0.1.0",
+  "description": "Drive qBittorrent from Claude Code: 15 task-shaped MCP tools over the full WebUI API, with safety gates that hold even through the raw escape hatch.",
+  "author": {
+    "name": "mt",
+    "url": "https://github.com/manueltarouca"
+  },
+  "repository": "https://github.com/manueltarouca/qbt-kit",
+  "license": "MIT",
+  "keywords": ["qbittorrent", "torrent", "mcp", "cli", "downloads"]
+}
