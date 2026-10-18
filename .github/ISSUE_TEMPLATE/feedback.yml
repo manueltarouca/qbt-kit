@@ -1,0 +1,17 @@
+name: Feedback
+description: An endpoint that behaves differently on your server, a missing capability, or something that read wrong.
+labels: ["feedback"]
+body:
+  - type: textarea
+    id: feedback
+    attributes:
+      label: What you ran into
+      description: >
+        Compatibility reports are useful. The contract tests cover
+        qBittorrent 4.6, 5.0, 5.1 and 5.2; anything outside that is untested.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: qBittorrent version, if relevant

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security issue
+    url: https://github.com/manueltarouca/qbt-kit/security/advisories/new
+    about: Report privately. This tool holds credentials and can delete data.

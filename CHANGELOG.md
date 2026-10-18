@@ -4,6 +4,22 @@ Notable changes to qbt-kit. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning is
 [semantic](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] — 2026-10-18
+
+### Fixed
+
+- The licence badge linked to a relative path, which resolves to nothing on
+  PyPI. Badges are now Markdown rather than raw HTML, so no HTML attribute is
+  left for a relative target to hide in.
+- `uvx qbt-mcp` appeared twice in the README. It resolves to nothing:
+  `qbt-mcp` is a console script inside `qbt-kit`, not a package. Both now read
+  `uvx --from "qbt-kit[mcp]" qbt-mcp`.
+
+### Added
+
+- The repository is also a plugin marketplace:
+  `/plugin install qbt-kit --marketplace manueltarouca/qbt-kit`.
+
 ## [0.1.0] — 2026-10-18
 
 First public release.

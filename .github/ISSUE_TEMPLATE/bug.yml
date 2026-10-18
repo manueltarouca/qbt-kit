@@ -1,0 +1,49 @@
+name: Bug
+description: Something behaved differently from what you expected.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, and what came back. Paste the command and the output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+  - type: input
+    id: qbt-version
+    attributes:
+      label: qBittorrent version
+      description: "`qbt doctor` prints it, or the WebUI's About page."
+      placeholder: "5.2.3 / WebAPI 2.15.1"
+    validations:
+      required: true
+  - type: input
+    id: qbt-kit-version
+    attributes:
+      label: qbt-kit version
+      placeholder: "0.1.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: How you were using it
+      options:
+        - CLI (qbt)
+        - MCP server (qbt-mcp)
+        - As a library
+        - Claude Code plugin
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste an API key, a password, or the output of
+        `app/preferences`. qBittorrent returns its own credentials in that
+        response.
