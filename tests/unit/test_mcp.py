@@ -258,6 +258,9 @@ def test_reading_preferences_never_returns_credentials(
 
     monkeypatch.setattr(S, "_client", lambda: _Prefs())
     raw = asyncio.run(S.server.call_tool(tool, args))
+    # call_tool is typed CallToolResult | InputRequiredResult; only the former
+    # carries content, and none of these tools ever asks for input.
+    assert isinstance(raw, CallToolResult), f"{tool} asked for input: {raw!r}"
     text = "\n".join(c.text for c in raw.content if isinstance(c, TextContent))
     assert _SECRET not in text, f"{tool} leaked a credential: {text[:300]}"
     # Non-secret values must survive, or redaction has eaten the answer.

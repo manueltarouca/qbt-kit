@@ -11,7 +11,12 @@ workflow below.
 uv sync --all-extras
 uv run pytest tests/unit -q          # fast, no containers
 uv run ruff check . && uv run ruff format --check .
+uv run ty check src tools tests      # same paths CI checks
 ```
+
+`ty` runs with `continue-on-error` in CI because it is pre-1.0, which means a
+type error leaves the job green and only shows up as an annotation. Run it over
+all three paths locally — checking `src` alone will not reproduce what CI sees.
 
 ## Adding or changing an endpoint
 
