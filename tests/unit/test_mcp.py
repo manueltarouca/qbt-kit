@@ -14,6 +14,7 @@ import json
 import pytest
 from mcp.types import CallToolResult, TextContent
 
+from qbtkit import errors
 from qbtkit.mcp import server as S
 from qbtkit.spec import load_all
 
@@ -265,3 +266,64 @@ def test_reading_preferences_never_returns_credentials(
     assert _SECRET not in text, f"{tool} leaked a credential: {text[:300]}"
     # Non-secret values must survive, or redaction has eaten the answer.
     assert "admin" in text and "dl_limit" in text
+
+
+def _raising(exc: Exception):
+    def _refuse() -> object:
+        raise exc
+
+    return _refuse
+
+
+def test_main_starts_when_qbittorrent_is_unreachable(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A dead qBittorrent must not stop the server from starting.
+
+    An MCP client launches its servers when the session starts, which for a
+    desktop qBittorrent is routinely before the application is running. Exiting
+    here strips every tool from the model's list and the client reports only
+    "connection closed", so the one fact worth knowing — that qBittorrent is
+    down — never reaches the user.
+    """
+    monkeypatch.setattr("sys.argv", ["qbt-mcp"])
+
+    monkeypatch.setattr(S, "_client", _raising(errors.TransportError("connection refused")))
+    ran: list[str] = []
+    monkeypatch.setattr(S.server, "run", lambda transport: ran.append(transport))
+
+    S.main()
+
+    out, err = capsys.readouterr()
+    assert ran == ["stdio"], "the server must still serve its tools"
+    assert "connection refused" in err
+    # stdout carries the JSON-RPC framing; anything else there corrupts it.
+    assert out == ""
+
+
+def test_main_keeps_serving_while_banned(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A ban expires on its own, so it is transient like a stopped server."""
+    monkeypatch.setattr("sys.argv", ["qbt-mcp"])
+    monkeypatch.setattr(S, "_client", _raising(errors.BannedError("banned for 3600s")))
+    ran: list[str] = []
+    monkeypatch.setattr(S.server, "run", lambda transport: ran.append(transport))
+
+    S.main()
+
+    assert ran == ["stdio"]
+
+
+def test_main_exits_on_rejected_credentials(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Bad credentials must stay fatal.
+
+    They never fix themselves while the process runs, and every tool call
+    builds a fresh client that re-POSTs auth/login. qBittorrent bans an IP for
+    repeated failed logins, so staying up would lock the user out of their own
+    WebUI — a worse outcome than exiting.
+    """
+    monkeypatch.setattr("sys.argv", ["qbt-mcp"])
+    monkeypatch.setattr(S, "_client", _raising(errors.AuthError("rejected")))
+    monkeypatch.setattr(S.server, "run", lambda transport: pytest.fail("must not serve"))
+
+    with pytest.raises(SystemExit, match="rejected"):
+        S.main()

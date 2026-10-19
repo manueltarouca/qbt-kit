@@ -742,8 +742,25 @@ def main() -> None:
                 f"{' · read-only' if _OPTS['read_only'] else ''}",
                 file=sys.stderr,
             )
+    except (errors.TransportError, errors.BannedError) as e:
+        # Report, but keep serving. An MCP client launches its servers when the
+        # session starts, which for a desktop qBittorrent is routinely before
+        # the application is running. Exiting strips every tool from the
+        # model's list and the client reports only "connection closed", so the
+        # one fact worth knowing — that qBittorrent is down — never reaches the
+        # user. Each tool reports the failure per call instead, where it can be
+        # acted on. Both of these clear on their own: the server comes up, the
+        # ban expires.
+        print(f"qbt-mcp: {e}", file=sys.stderr)
     except errors.QbtError as e:
-        raise SystemExit(f"qbt-mcp: cannot reach qBittorrent: {e}") from e
+        # Everything else here is a configuration error that will not fix
+        # itself while the process runs — rejected credentials, a refused host
+        # header. Staying up would be worse than exiting: every tool call
+        # builds a fresh client and re-POSTs auth/login, and repeated failed
+        # logins are exactly what qBittorrent bans an IP for, which would lock
+        # the user out of the WebUI in their browser too. Exit, as the ${VAR}
+        # check above does.
+        raise SystemExit(f"qbt-mcp: {e}") from e
 
     server.run(transport=args.transport)
 

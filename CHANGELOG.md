@@ -4,6 +4,21 @@ Notable changes to qbt-kit. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning is
 [semantic](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- `qbt-mcp` exited when qBittorrent was unreachable at startup. An MCP client
+  launches its servers when the session starts, which for a desktop qBittorrent
+  is routinely before the application is running, so the server vanished and
+  the client reported only "connection closed" — never the one fact worth
+  knowing. A stopped server and an expiring ban are now reported on stderr and
+  the tools serve regardless, each reporting the failure per call. Rejected
+  credentials and a refused host header stay fatal: they do not fix themselves,
+  and since every tool call builds a fresh client that re-POSTs `auth/login`,
+  staying up would trip qBittorrent's ban on repeated failed logins and lock
+  the user out of the WebUI in their browser too.
+
 ## [0.1.1] — 2026-10-18
 
 ### Fixed
