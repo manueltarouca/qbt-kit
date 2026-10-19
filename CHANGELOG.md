@@ -4,7 +4,7 @@ Notable changes to qbt-kit. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning is
 [semantic](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.1.2] — 2026-10-19
 
 ### Fixed
 
